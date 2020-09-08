@@ -33,10 +33,11 @@
 
 
 #include "board.h"
+#include "board-config.h"
 #include "i2c-board.h"
 
 #include "em_i2c.h"
-#include "i2cspm.h"
+#include "sl_i2cspm.h"
 
 void I2cMcuInit( I2c_t* obj, I2cId_t i2cId, PinNames scl, PinNames sda )
 {
@@ -44,12 +45,15 @@ void I2cMcuInit( I2c_t* obj, I2cId_t i2cId, PinNames scl, PinNames sda )
     obj->Scl.pin = scl;
     obj->Sda.pin = sda;
 
-    I2CSPM_Init_TypeDef i2c_init = I2CSPM_INIT_DEFAULT;
+    I2CSPM_Init_TypeDef i2c_init;// = I2CSPM_INIT_DEFAULT;
     i2c_init.port = I2C(i2cId);
     i2c_init.sclPort = PORT_FROM_GPIO(scl);
     i2c_init.sclPin  = PIN_FROM_GPIO(scl);
     i2c_init.sdaPort = PORT_FROM_GPIO(sda);
     i2c_init.sdaPin  = PIN_FROM_GPIO(sda);
+    i2c_init.i2cRefFreq = 0;
+    i2c_init.i2cMaxFreq = 400000;
+    i2c_init.i2cClhr = i2cClockHLRStandard;
     I2CSPM_Init(&i2c_init);
 }
 

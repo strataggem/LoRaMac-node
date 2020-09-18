@@ -62,10 +62,11 @@ void RtcInit( void )
 {
     //ensure the LFRCO is stopped before setting high precision mode? (to avoid bus fault as stated in datasheet)
     //CMU_ClockEnable(cmuClock_LFRCO, false);
-    CMU_LFRCOSetPrecision(cmuPrecisionHigh);
-    CMU_ClockEnable(cmuClock_LFRCO, true);
+//    CMU_LFRCOSetPrecision(cmuPrecisionHigh);
+//    CMU_ClockEnable(cmuClock_LFRCO, true);
     //TODO: add LFXO? LFRCO has only 500ppm max precision in precision mode
-    CMU_ClockSelectSet(cmuClock_RTCCCLK, cmuSelect_LFRCO);
+//    CMU_ClockSelectSet(cmuClock_RTCCCLK, cmuSelect_LFRCO);
+//    CMU_ClockSelectSet(cmuClock_RTCCCLK, cmuSelect_LFXO);
     CMU_ClockEnable(cmuClock_RTCC, true);
 
     // Initialize alarm (RTC Compare Channel 1)
